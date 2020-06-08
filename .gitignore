@@ -351,3 +351,6 @@ MigrationBackup/
 
 .DS_Store
 README.assets/
+.idea/
+cmake-build-debug/
+CMakeLists.txt
