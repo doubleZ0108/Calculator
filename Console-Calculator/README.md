@@ -205,7 +205,6 @@ while (!isempty_op_stack()) {
 | **ID**          | 1754060                                             |
 | **Academy**     | 软件学院                                            |
 | **Course Name** | 2020人工智能微专业 - 数据结构                       |
-| **Course Time** | 星期二 3-4 [1-17] 星期四 3-4 双[2-16]               |
 | **Email**       | [dbzdbz@tongji.edu.cn](mailto:dbzdbz.tongji.edu.cn) |
 
 <br/>

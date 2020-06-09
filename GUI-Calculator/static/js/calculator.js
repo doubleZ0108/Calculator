@@ -23,6 +23,10 @@ function clear(){
     result.style.fontSize = 48 + 'px';
 }
 
+/**
+ * Button callback
+ * @param {clicked char} ch: text from the button clicked
+ */
 function appendChar(ch){
     let str = result.innerHTML.trim();
     
@@ -43,6 +47,9 @@ function appendChar(ch){
     result.innerHTML += ch;
 }
 
+/**
+ * Main Calculation function
+ */
 function calculate(){
     let exp = result.innerHTML.trim();
     console.log(exp);
@@ -58,6 +65,10 @@ function calculate(){
     }
 }
 
+/**
+ * Get next element(number or operator) from the expression
+ * @param {input expression} exp 
+ */
 function getNextContent(exp){
     if(isOperator(exp[_current])) {
         _current++;
@@ -114,6 +125,10 @@ function icp(ch) {
     }
 }
 
+/**
+ * Change the expression to postfix format
+ * @param {input expression} exp 
+ */
 function toPostfix(exp){
     let op_stack = [];
     _current = 0;
@@ -151,6 +166,10 @@ function toPostfix(exp){
     return postfix_exp;
 }
 
+/**
+ * Calculate the postfix expression
+ * @param {postfix expression} postfix_exp 
+ */
 function calulatePostfixExpression(postfix_exp){
     let num_stack = [];
     postfix_exp.forEach(function(elem){
