@@ -74,7 +74,7 @@ bool isDigit(char ch)
 
 /**
  * Judge the expression is a number or not
- * Number include(positive negative decimal & some spetical number like +3 etc.)
+ * Number include(positive negative & some spetical number like +3 etc.)
  * @param exp: input expression
  * @return: whether it is a number of not
  */

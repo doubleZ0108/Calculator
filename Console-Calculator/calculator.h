@@ -71,7 +71,6 @@ int _current = 0;
  *  - 操作数
  *      - 正数
  *      - 负数
- *      - 浮点数
  *      - 特殊数字
  */
 struct Data NextContent(char* exp)

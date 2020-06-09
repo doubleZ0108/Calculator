@@ -11,6 +11,9 @@
 #include "interface.h"
 #include "calculator.h"
 
+/**
+ * Cherry Calculator main loop
+ */
 int main(){
     char command[128];      // user input - command
     char option[100];       // option that command carry by
