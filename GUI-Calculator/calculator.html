@@ -6,20 +6,21 @@
     <title>GUI Calculator</title>
     <link rel="stylesheet" href="static/css/calculator.css">
     <script src="static/js/calculator.js"></script>
+    <script src="static/js/util.js"></script>
 </head>
 <body>
     <div class="calculator">
-        <div class="result" style="grid-area: result;">
+        <div id="result" class="result" style="grid-area: result;">
             0
         </div>
-        <button style="grid-area: ac;">AC</button>
-        <button style="grid-area: plus-minus;">±</button>
-        <button style="grid-area: percent;">%</button>
+        <button id="ac" style="grid-area: ac;">AC</button>
+        <button style="grid-area: left-bracket;">(</button>
+        <button style="grid-area: right-bracket;">)</button>
         <button style="grid-area: add;">+</button>
         <button style="grid-area: subtract;">-</button>
         <button style="grid-area: multiply;">&times;</button>
         <button style="grid-area: divide;">/</button>
-        <button style="grid-area: equal;">=</button>
+        <button id="equal" style="grid-area: equal;">=</button>
 
         <button style="grid-area: number-1;">1</button>
         <button style="grid-area: number-2;">2</button>
@@ -32,7 +33,7 @@
         <button style="grid-area: number-9;">9</button>
         <button style="grid-area: number-0;">0</button>
 
-        <button style="grid-area: dot;">.</button>
+        <!-- <button style="grid-area: plus-minus;">±</button> -->
     </div>
 </body>
 </html>
