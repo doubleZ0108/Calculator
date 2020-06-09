@@ -58,6 +58,7 @@ function calculate(){
     console.log(postfix_exp);
 
     let cal_result = calulatePostfixExpression(postfix_exp);
+    console.log(cal_result);
     if(cal_result === undefined) {
         result.innerHTML = "ERROR"
     } else {
