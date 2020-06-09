@@ -1,6 +1,18 @@
 # 控制台计算器(Cherry-Calculator)
 
-[toc]
+#### Table of Contents
+
+   * [控制台计算器(Cherry-Calculator)](#控制台计算器cherry-calculator)
+      * [功能介绍](#功能介绍)
+      * [开发环境](#开发环境)
+      * [实现效果](#实现效果)
+      * [核心实现](#核心实现)
+         * [对表达式进行美化](#对表达式进行美化)
+         * [优先级](#优先级)
+         * [将中缀表达式转换为后缀表达式](#将中缀表达式转换为后缀表达式)
+         * [获取下一内容](#获取下一内容)
+      * [关于作者](#关于作者)
+      * [项目结构](#项目结构)
 
 ------
 
@@ -16,39 +28,51 @@
 
 <br/>
 
+## 开发环境
+
+- **操作系统**
+  - **开发环境**：macOS Catalina 10.15.4
+  - **打包环境**：Windows 10
+- **IDE**
+  - CLion 2019.3.3
+  - Visual Studio 2017
+- **开发语言**: C语言
+
+<br/>
+
 ## 实现效果
 
 - 计算表达式的值
 
-  <img src="README.assets/image-20200609135434749.png" alt="image-20200609135434749" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-087b99d1d990ddb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135434749" width="50%;" />
 
 - 对表达式进行美化
 
-  <img src="README.assets/image-20200609135509630.png" alt="image-20200609135509630" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-7411762899f8f960.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135509630" width="50%;" />
 
 - 将中缀表达式转换为后缀表达式
 
-  <img src="README.assets/image-20200609135546892.png" alt="image-20200609135546892" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-61d0952aec1943c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135546892" width="50%;" />
 
 - 表达式中含有非法字符
 
-  <img src="README.assets/image-20200609135607226.png" alt="image-20200609135607226" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-df33fc69969ccf5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135607226" width="50%;" />
 
 - 表达式括号不匹配
 
-  <img src="README.assets/image-20200609135625680.png" alt="image-20200609135625680" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-a4072d645a8d1b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135625680" width="50%;" />
 
 - 帮助信息
 
-  <img src="README.assets/image-20200609135709321.png" alt="image-20200609135709321" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-85dc6c4f6c11a878.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135709321" width="50%;" />
 
 - 未找到该指令
 
-  <img src="README.assets/image-20200609135724460.png" alt="image-20200609135724460" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-75d571030d107cd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609135724460" width="50%;" />
 
 - 退出Cherry Calculator
 
-  <img src="README.assets/image-20200609140632311.png" alt="image-20200609140632311" width="50%;" />
+  <img src="https://upload-images.jianshu.io/upload_images/12014150-5bf214981874894d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609140632311" width="50%;" />
 
 <br/>
 
@@ -122,7 +146,7 @@ int icp(char ch)
 
 ### 将中缀表达式转换为后缀表达式
 
-<img src="README.assets/image-20200609140201006.png" alt="image-20200609140201006" width="70%;" />
+<img src="https://upload-images.jianshu.io/upload_images/12014150-f910636d2eaa62b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609140201006" width="70%;" />
 
 ```c
 num_stack_clear();  // 初始化操作数栈
@@ -169,7 +193,7 @@ while (!isempty_op_stack()) {
 
 ### 获取下一内容
 
-<img src="README.assets/image-20200609140359174.png" alt="image-20200609140359174" width="70%;" />
+<img src="https://upload-images.jianshu.io/upload_images/12014150-c2303cafe8daea5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image-20200609140359174" width="70%;" />
 
 <br/>
 
@@ -188,7 +212,20 @@ while (!isempty_op_stack()) {
 
 ## 项目结构
 
-```
-
+```c
+.
+├── CMakeLists.txt					// CLion cmake文件
+├── Console-Calculator.exe	// 可执行程序
+├── Console-Calculator.sln	// Visual Studio2017 工程
+├── README.md
+├── doc
+│   └── 控制台计算器说明文档.pdf
+└── src
+    ├── header
+    │   ├── calculator.h
+    │   ├── calculator_stack.h
+    │   ├── interface.h
+    │   └── util.h
+    └── main.c
 ```
 
