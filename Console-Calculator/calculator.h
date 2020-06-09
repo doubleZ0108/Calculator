@@ -13,103 +13,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "util.h"
-
-/*============ 判断表达式括号是否匹配 ============*/
-char bucket_stack[100] = "\0";
-int bucket_stack_index = -1;
-
-bool isempty_bucket_stack() {
-    return bucket_stack_index == -1;
-}
-
-void bucket_stack_push(char ch) {
-    bucket_stack_index++;
-    bucket_stack[bucket_stack_index] = ch;
-}
-
-char bucket_stack_pop(void) {
-    if (isempty_bucket_stack()) {
-        return EMPTY_CH;
-    }
-    char ch = bucket_stack[bucket_stack_index];
-    bucket_stack_index--;
-    return ch;
-}
-
-void bucket_stack_clear(void) {
-    memset(bucket_stack, '\0', sizeof(bucket_stack));
-    bucket_stack_index = -1;
-}
-
-
-/*============ 操作数栈 ============*/
-int num_stack[100] = { 0 };
-int num_stack_index = -1;
-
-bool isempty_num_stack() {
-    return num_stack_index == -1;
-}
-
-void num_stack_push(int num) {
-    num_stack_index++;
-    num_stack[num_stack_index] = num;
-}
-
-int num_stack_pop(void) {
-    if (isempty_num_stack()) {
-        return EMPTY_NUM;
-    }
-    int num = num_stack[num_stack_index];
-    num_stack[num_stack_index] = 0;
-    num_stack_index--;
-    return num;
-}
-
-void num_stack_clear(void) {
-    memset(num_stack, 0, sizeof(num_stack));
-    num_stack_index = -1;
-}
-
-
-/*============ 操作符栈 ============*/
-char op_stack[100] = "\0";
-int op_stack_index = -1;
-
-bool isempty_op_stack() {
-    return op_stack_index == -1;
-}
-
-void op_stack_push(char ch) {
-    op_stack_index++;
-    op_stack[op_stack_index] = ch;
-}
-
-char op_stack_pop(void) {
-    if (isempty_op_stack()) {
-        return EMPTY_CH;
-    }
-    char ch = op_stack[op_stack_index];
-    op_stack[op_stack_index] = '\0';
-    op_stack_index--;
-    return ch;
-}
-
-char op_stack_top(void) {
-    if (isempty_op_stack()) {
-        return EMPTY_CH;
-    }
-    return op_stack[op_stack_index];
-}
-
-void op_stack_clear(void) {
-    memset(op_stack, '\0', sizeof(op_stack));
-    op_stack_index = -1;
-}
-
+#include "calculator_stack.h"
 
 /*============ 优先级 ============*/
+/**
+ * 栈内优先级
+ */
 int isp(char ch)
-//栈内优先级
 {
     switch (ch)
     {
@@ -120,8 +30,11 @@ int isp(char ch)
         case ')':return 6;
     }
 }
+
+/**
+ * 栈外优先级
+ */
 int icp(char ch)
-//栈外优先级
 {
     switch (ch)
     {
@@ -133,13 +46,17 @@ int icp(char ch)
     }
 }
 
-/*============ 在表达式最后添加 # 标识符 ============*/
+
+/**
+ * Add a '#' as tile for the expression
+ */
 void addTail(char* exp) {
     int i;
     for (i = 0; i < strlen(exp); ++i);
     exp[i] = ' ';
     exp[i + 1] = '#';
 }
+
 
 /*============ 封装表达式中的项 ============*/
 struct Data {
@@ -148,7 +65,15 @@ struct Data {
 };
 int _current = 0;
 
-/*============ 获取表达式中的下一项 ============*/
+/**
+ * 获取表达式中的下一项
+ *  - 操作符
+ *  - 操作数
+ *      - 正数
+ *      - 负数
+ *      - 浮点数
+ *      - 特殊数字
+ */
 struct Data NextContent(char* exp)
 {
     char _next[100] = "\0";
@@ -188,7 +113,14 @@ struct Data NextContent(char* exp)
 }
 
 
-/*============ 根据运算符和两个操作数计算值 ============*/
+/*============ 计算任务 ============*/
+/**
+ * Calculate two numbers based on a single middle operator
+ * @param left: left number
+ * @param op: middle operator
+ * @param right: right number
+ * @return: calculation value
+ */
 int Cal(int left, char op, int right)
 {
     switch (op)
@@ -211,21 +143,12 @@ int Cal(int left, char op, int right)
     }
 }
 
-/*============ 输出后缀表达式 ============*/
-void showBackMode(struct Data result[], int size) {
-    printf("The reverse polish notation is: ");
-    for (int i = 0; i < size; ++i) {
-        if (result[i].flag == 0) {
-            printf("%c ", result[i].data);
-        }
-        else {
-            printf("%d ", result[i].data);
-        }
-    }
-    printf("\n");
-}
-
-/*============ 计算后缀表达式的结果 ============*/
+/**
+ * Calculate the value of postfix expression
+ * @param result: struct data array
+ * @param size: length of the items
+ * @return: value of the postfix expression
+ */
 int calResult(struct Data result[], int size)
 {
     num_stack_clear();
@@ -240,6 +163,24 @@ int calResult(struct Data result[], int size)
         }
     }
     return num_stack_pop();
+}
+
+/**
+ * Show postfix expression
+ * @param result
+ * @param size
+ */
+void showPostfix(struct Data result[], int size) {
+    printf("The reverse polish notation is: ");
+    for (int i = 0; i < size; ++i) {
+        if (result[i].flag == 0) {
+            printf("%c ", result[i].data);
+        }
+        else {
+            printf("%d ", result[i].data);
+        }
+    }
+    printf("\n");
 }
 
 /**
@@ -363,12 +304,16 @@ int calculate(char* origin_exp, bool if_showrev, bool if_beauty) {
     }
 
     if (if_showrev) {
-        showBackMode(result, index);
+        showPostfix(result, index);
     }
 
     return calResult(result, index);
 }
 
+/**
+ * Main function for math - manage the user input
+ * @param expression
+ */
 void mathMain(char* expression)
 {
     if (!strcmp(expression, "NULL")) {
@@ -483,6 +428,5 @@ void mathMain(char* expression)
 
     printf("\n");
 }
-
 
 #endif //CONSOLE_CALCULATOR_CALCULATOR_H
